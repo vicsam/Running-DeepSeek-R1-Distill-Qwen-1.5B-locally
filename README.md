@@ -70,10 +70,10 @@
 
 ## 4. Getting Started with GGUF
 
-### 1. Downloading a `.gguf` File
+###  Downloading a `.gguf` File
 You can search for and download `.gguf` files from Hugging Face. 
 
-### Clone the DeepSeek-R1-Distill-Qwen-1.5B Repository
+### Cloning the DeepSeek-R1-Distill-Qwen-1.5B Repository
 
 To clone the model from Hugging Face, run the following command:
 
@@ -84,33 +84,36 @@ git clone https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B
 
 Since **Ollama** only supports the `.gguf` format, models in `.safetensors` format need to be converted to `.gguf`.
 
-## 1. Download `llama.cpp` Library
+##  Download `llama.cpp` Library
 
-To get started, clone the `llama.cpp` repository:
+# To get started, clone the `llama.cpp` repository:
 
 ```bash
 git clone https://github.com/ggerganov/llama.cpp.git
 ````
 
-Open the llama directory
+# Open the llama directory
 ```bash
 cd llama.cpp
 ```
 
-Install the requirements
+# Install the requirements
 ```bash
 pip install -r requirements.txt
 ```
 
-Create the conversion file
+# Create the conversion file
 ```bash
 python convert_hf_to_gguf.py -h
 ```
 # After installation, convert to which ever quantization schemes preferable. 
-command example if on windows
+
+Command example if on windows
+
 ```bash
 python convert_hf_to_gguf.py "C:/Users/<username>/documents/ollama/DeepSeek-R1-Distill-Qwen-1.5B/" --outfile "C:/Users/<username>/documents/ollama/DeepSeek-R1-Distill-Qwen-1.5B-q8_0.gguf" --outtype q8_0
 ````
+
 Notice in this conversion, the model is stored in my `ollama` folder, which is then convert to q8_0; this is preferable for me due to the capacity of my PC. The converted form of the model is then stored in the same folder but with a different name `DeepSeek-R1-Distill-Qwen-1.5B-q8_0.gguf`
 
 After this is done, open the folder where the converted model is stored; new form should have the extension `.gguf` attached to it
@@ -118,6 +121,7 @@ After this is done, open the folder where the converted model is stored; new for
 Create a Modelfile in same folder where the converted version is stored; Modelfile should be a txt file.
 
 This is what should be in your Modelfile
+
 ```bash
 FROM ./my_DeepSeek-R1-Distill-Qwen-1.5B-q8_0.gguf
 TEMPLATE """{{- if .System }}{{ .System }}{{ end }}
@@ -133,5 +137,60 @@ PARAMETER stop "<|end▁of▁sentence|>"
 PARAMETER stop "<|User|>"
 PARAMETER stop "<|Assistant|>"
 ```
+
 The first line that says `FROM ./DeepSeek-R1-Distill-Qwen-1.5B-q8_0.gguf`,  `DeepSeek-R1-Distill-Qwen-1.5B-q8_0.gguf` should be replaced with the name given to your converted model
 
+After that is done save the Modelfile
+
+# ollama create a model
+
+```bash
+ollama create DeepSeek-R1-Distill-Qwen-1.5B-q8_0.gguf -f Modelfile
+```
+
+Note: this `DeepSeek-R1-Distill-Qwen-1.5B-q8_0.gguf` should be replaced with the name given to your converted model
+
+# Ollama running model
+
+```bash
+ollama run DeepSeek-R1-Distill-Qwen-1.5B-q8_0.gguf
+```
+
+Note: this `DeepSeek-R1-Distill-Qwen-1.5B-q8_0.gguf` should be replaced with the name given to your converted model
+
+<img width="863" alt="image" src="https://github.com/user-attachments/assets/2a0c73e7-5d28-43de-9e5e-42c801618b6c" />
+
+# Connecting a User Interface (UI) for DeepSeek-R1-Distill-Qwen-1.5B  
+
+To enhance the usability of your locally running **DeepSeek-R1-Distill-Qwen-1.5B** model, you can connect it to a graphical user interface (GUI). For this guide, we’ll use **Chatbox UI**, a lightweight and intuitive tool designed for interacting with language models.  
+
+---
+
+## Step 1: Download and Install Chatbox UI  
+
+Visit the official **Chatbox UI** website:  
+🔗 [Chatbox AI](https://chatboxai.app/en)  
+
+Download the appropriate version for your operating system:  
+- **Windows**  
+- **macOS**  
+- **Linux**  
+
+Follow the installation instructions provided on the website.  
+
+---
+
+## Step 2: Configure Chatbox UI  
+
+Once installed, configure **Chatbox UI** to connect to your locally running **Ollama** model.  
+
+### 1️⃣ Launch Chatbox UI  
+- Open the application from your desktop or terminal.  
+
+### 2️⃣ Open Settings  
+- Navigate to the **Settings** menu within Chatbox UI.  
+- This is usually accessible via the gear icon or a dedicated settings tab.  
+
+### 3️⃣ Connect to Ollama  
+- In **Settings**, locate the option to connect to an external model provider.  
+- Select **Ollama** as the backend provider.  

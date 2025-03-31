@@ -194,3 +194,10 @@ Once installed, configure **Chatbox UI** to connect to your locally running **Ol
 ### 3️⃣ Connect to Ollama  
 - In **Settings**, locate the option to connect to an external model provider.  
 - Select **Ollama** as the backend provider.  
+
+<img width="959" alt="image" src="https://github.com/user-attachments/assets/80e9fcb4-104f-42d5-a33c-93e43ed14775" />  <img width="959" alt="image" src="https://github.com/user-attachments/assets/c1733128-c72d-4605-aa5e-906f56f696c4" />
+
+When done uploading, should be like so when a new chat is opened
+
+
+
